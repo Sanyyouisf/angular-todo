@@ -46,6 +46,8 @@ app.controller("ItemCtrl", ($http, $q, $scope, FIREBASE_CONFIG) => {
       });
     };
 
+
+
     let getItems = () => {
       getItemList()
       .then((itemz) => {
@@ -57,7 +59,7 @@ app.controller("ItemCtrl", ($http, $q, $scope, FIREBASE_CONFIG) => {
       });
     };
 
-    
+getItems();
 
   let postNewItem = (newItem) => {
     return $q((resolve,reject)=>{
