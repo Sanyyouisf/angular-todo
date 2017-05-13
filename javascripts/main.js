@@ -29,6 +29,8 @@ app.controller("ItemCtrl",($scope) =>{
         }
       ];
 
+
+
 	$scope.newItem = () => {
 		console.log("newItem");
 		$scope.showListView = false;
