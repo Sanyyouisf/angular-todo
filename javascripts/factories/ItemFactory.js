@@ -3,13 +3,15 @@ app.factory("ItemFactory", function($q, $http, FIREBASE_CONFIG) {
         let itemz = [];
         return new $q((resolve, reject) => {
             $http.get(`${FIREBASE_CONFIG.databaseURL}/items.json`)
-            .then((fbItems) => {
-                var itemCollection = fbItems.data;
-                Object.keys(itemCollection).forEach((key) => {
-                    itemCollection[key].id = key;
-                    itemz.push(itemCollection[key]);
-                });
-                resolve(itemz);
+                .then((fbItems) => {
+                    let itemCollection = fbItems.data;
+                    if (itemCollection !== null) {
+                        Object.keys(itemCollection).forEach((key) => {
+                            itemCollection[key].id = key;
+                            itemz.push(itemCollection[key]);
+                        });
+                    }
+                    resolve(itemz);
                 })
                 .catch((error) => {
                     reject(error);
@@ -20,25 +22,25 @@ app.factory("ItemFactory", function($q, $http, FIREBASE_CONFIG) {
     let postNewItem = (newItem) => {
         return $q((resolve, reject) => {
             $http.post(`${FIREBASE_CONFIG.databaseURL}/items.json`, JSON.stringify(newItem))
-            .then((resultz) => {
-                resolve(resultz);
-            })
-            .catch((error) => {
+                .then((resultz) => {
+                    resolve(resultz);
+                })
+                .catch((error) => {
                     reject(error);
-            });
+                });
         });
     };
 
 
-    let deletz = (itemId)=>{
-        return $q((resolve,reject)=>{
+    let deletz = (itemId) => {
+        return $q((resolve, reject) => {
             $http.delete(`${FIREBASE_CONFIG.databaseURL}/items/${itemId}.json`)
-            .then((resultz) => {
-                resolve(resultz);
-            })
-            .catch((error) => {
-                reject(error);
-            });
+                .then((resultz) => {
+                    resolve(resultz);
+                })
+                .catch((error) => {
+                    reject(error);
+                });
         });
     };
 
@@ -46,7 +48,5 @@ app.factory("ItemFactory", function($q, $http, FIREBASE_CONFIG) {
 
 
 
-
-
-    return { getItemList: getItemList, postNewItem: postNewItem, deletz:deletz };
+    return { getItemList: getItemList, postNewItem: postNewItem, deletz: deletz };
 });
