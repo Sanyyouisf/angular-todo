@@ -64,6 +64,7 @@ app.factory("ItemFactory", function($q, $http, FIREBASE_CONFIG) {
 
     let editItem = (item) => {
         return $q((resolve, reject) => {
+            //The JSON.stringify() method converts a JavaScript value to a JSON string, 
             $http.put(`${FIREBASE_CONFIG.databaseURL}/items/${item.Id}.json`, JSON.stringify({
                     assignedTo: item.assignedTo,
                     isCompleted: item.isCompleted,

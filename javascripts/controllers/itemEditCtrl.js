@@ -1,7 +1,10 @@
 app.controller("ItemEditCtrl",function($location,$routeParams,$scope,ItemFactory){
-    console.log("iside ItemEditCtrl ");
+    //The $routeParams is a service allows you to retrieve the current set of route parameters.
+    console.log("inside ItemEditCtrl ");
     $scope.newTask ={};
-    ItemFactory.getSingleItem($routeParams.id).then((results)=>{
+    ItemFactory.getSingleItem($routeParams.id)
+    .then((results)=>{
+        console.log("results inside ItemEditCtrl is ",results);
     	 $scope.newTask=results.data;
     }).catch((error)=>{
     	console.log("error",error);
