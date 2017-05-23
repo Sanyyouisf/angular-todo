@@ -23,6 +23,12 @@ app.controller("AuthCtrl", function($rootScope, $location,$scope, AuthFactory, U
     	});
     };
 
+    if ($location.path()==='logout'){
+    	AuthFactory.logout();
+    	$rootScope.user={};
+    	$location.url('/auth');
+    }
+
     $scope.registerUser = () => {
     	//new auth
     	
