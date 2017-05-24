@@ -1,3 +1,4 @@
+<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 <div class="container col-xs-4 col-xs-offset-4">
     <input type="email" class="form-control form-spacing"  ng-model="auth.email" placeholder="Email" Address" required autofocus>
     <input type="password" class="form-control form-spacing" ng-model="auth.password" placeholder="Password" required>
