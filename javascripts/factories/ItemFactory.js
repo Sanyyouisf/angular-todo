@@ -36,7 +36,6 @@ app.factory("ItemFactory", function($q, $http, FIREBASE_CONFIG) {
 
 
     let postNewItem = (newItem) => {
-        console.log("item",item);
         return $q((resolve, reject) => {
             $http.post(`${FIREBASE_CONFIG.databaseURL}/items.json`, JSON.stringify(newItem))
                 .then((resultz) => {
@@ -66,11 +65,12 @@ app.factory("ItemFactory", function($q, $http, FIREBASE_CONFIG) {
     let editItem = (item) => {
         return $q((resolve, reject) => {
             //The JSON.stringify() method converts a JavaScript value to a JSON string, 
-            $http.put(`${FIREBASE_CONFIG.databaseURL}/items/${item.Id}.json`, JSON.stringify({
+            $http.put(`${FIREBASE_CONFIG.databaseURL}/items/${item.id}.json`, JSON.stringify({
                     assignedTo: item.assignedTo,
                     isCompleted: item.isCompleted,
                     task: item.task,
-                    uid:item.id
+                    uid:item.uid,
+                    dueDate:item.dueDate
                 })).then((resultz) => {
                     resolve(resultz);
                 })
