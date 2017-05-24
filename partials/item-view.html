@@ -3,3 +3,9 @@
 
 <h2>Assigned To : {{selectedItem.assignedTo}}</h2>
 <h2>completed : {{selectedItem.isCompleted}}</h2>
+<h2>tools</h2>
+<ul >
+	<li ng-repeat="tool in tools">
+		{{tool.implement}}
+	</li>
+</ul>
