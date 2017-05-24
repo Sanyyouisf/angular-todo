@@ -1,24 +1,30 @@
 app.controller("AuthCtrl", function($rootScope, $location,$scope, AuthFactory, UserFactory) {
     console.log("inside AuthCtrl ");
-
+    $scope.alerts=[];
     $scope.auth = {
     	email:"s@s.com",
     	password:"111111"
     };
+
+    $scope.addAlert = function() {
+    $scope.alerts.push({msg: 'Another alert!'});
+  };
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
 
     let LogMeIn=()=>{
     	AuthFactory.authenticate($scope.auth)
     	.then((usercreds)=>{
     		console.log("usercred",usercreds);
     		return UserFactory.getUser(usercreds.uid);
-    	},(error)=>{
-    		console.log("error in Authenticate",error);
-
     	}).then((user)=>{
     		console.log("user",user);
     		$rootScope.user = user;
     		$location.url('items/list');
     	}).catch((error)=>{
+    		$scope.alerts.push({msg: error.message});
     		console.log("getUser error", error );
     	});
     };
