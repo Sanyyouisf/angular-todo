@@ -29,22 +29,20 @@ app.controller("AuthCtrl", function($rootScope, $location,$scope, AuthFactory, U
     	});
     };
 
-    if ($location.path()==='logout'){
+    if ($location.path()==='/logout'){
     	AuthFactory.logout();
     	$rootScope.user={};
     	$location.url('/auth');
     }
 
-    $scope.registerUser = () => {
-    	//new auth
-    	
+
+    $scope.registerUser = () => {    	
     	AuthFactory.registerWithEmail($scope.auth)
     	.then((didRegister)=>{
     		console.log("you registered ", didRegister);
     		$scope.auth.uid = didRegister.uid;
     		return UserFactory.addUser($scope.auth);
     		// console.log("$scope.auth inside registerUser",$scope.auth);
-
     	}, (error) => {
     		console.log("error in registerWithEmail",error);
     	}).then((registerComplete)=>{
