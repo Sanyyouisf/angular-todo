@@ -18,7 +18,7 @@ app.run(function($location, $rootScope, FIREBASE_CONFIG, AuthFactory) {
   $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute) {
     // checks to see if there is a current user
     var logged = AuthFactory.isAuthenticated();
-
+    console.log("logged is : ",logged );
     var appTo;
 
     // to keep error from being thrown on page refresh

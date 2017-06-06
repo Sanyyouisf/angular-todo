@@ -6,6 +6,7 @@ app.factory("ItemFactory", function($q, $http, FIREBASE_CONFIG) {
                 .then((fbItems) => {
                     let itemCollection = fbItems.data;
                     if (itemCollection !== null) {
+                        //to loop through an object and return an array 
                         Object.keys(itemCollection).forEach((key) => {
                             itemCollection[key].id = key;
                             itemz.push(itemCollection[key]);
@@ -53,6 +54,7 @@ app.factory("ItemFactory", function($q, $http, FIREBASE_CONFIG) {
             $http.delete(`${FIREBASE_CONFIG.databaseURL}/items/${itemId}.json`)
                 .then((resultz) => {
                     resolve(resultz);
+                    console.log("resultz in deletz",resultz);
                 })
                 .catch((error) => {
                     reject(error);
